@@ -9,9 +9,9 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", help_path
     assert_select "a[href=?]", '#', text: "Log in"
     
-    # Проверка страницы регистрации
+    # Checking the registration page
     get signup_path
-    # Исправляем заголовок на актуальный
+    # Correct the title to the current one
     assert_select "title", "Sign up | Ruby on Rails Tutorial Sample App"
   end
 end
