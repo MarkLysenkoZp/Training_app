@@ -7,4 +7,14 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
+
+  validate :password_complexity
+
+  private
+
+  def password_complexity
+    return if password.blank? || password =~ /^(?=.*[a-zA-Z])(?=.*[0-9])/
+
+    errors.add :password, 'must include at least one letter and one digit'
+  end
 end
