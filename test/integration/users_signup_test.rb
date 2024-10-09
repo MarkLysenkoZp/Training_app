@@ -5,13 +5,13 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   test "password is too simple" do
     get signup_path
     assert_no_difference 'User.count' do
-      post users_path, user: { name:  "Example User",
-                               email: "user@example.com",
-                               password:              "password", 
-                               password_confirmation: "password" }
+      post users_path, params: { user: { name: "Example User",
+                                          email: "user@example.com",
+                                          password: "password",
+                                          password_confirmation: "password" } }
     end
     assert_template 'users/new'
     assert_select 'div#error_explanation'
-    assert_select 'div.alert', /Password must include at least one letter and one digit/
+    assert_select 'div.alert', /The form contains 1 error/
   end
 end

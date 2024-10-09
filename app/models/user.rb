@@ -13,8 +13,7 @@ class User < ActiveRecord::Base
   private
 
   def password_complexity
-    return if password.blank? || password =~ /^(?=.*[a-zA-Z])(?=.*[0-9])/
-
-    errors.add :password, 'must include at least one letter and one digit'
+    return if password =~ /(?=.*[a-zA-Z])(?=.*\d)/ # At least one letter and one digit
+    errors.add(:password, "must include at least one letter and one digit")
   end
 end
