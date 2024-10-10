@@ -16,4 +16,15 @@ class UserTest < ActiveSupport::TestCase
     @user.password = @user.password_confirmation = "a" * 5
     assert_not @user.valid?
   end
+
+  test "password should include at least one letter and one digit" do
+    @user.password = @user.password_confirmation = "password"  
+    assert_not @user.valid?
+    
+    @user.password = @user.password_confirmation = "12345678"  
+    assert_not @user.valid?
+    
+    @user.password = @user.password_confirmation = "password123"
+    assert @user.valid?
+  end
 end
